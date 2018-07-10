@@ -117,14 +117,12 @@ if [ ${UID} == 0 ]; then
         echo "========================================================================"
     	;;
     	4)
-    	bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-    	source /root/.gvm/scripts/gvm
-    	apt-get install -y bison gcc make
-    	gvm install go1.10
-        gvm use go1.10
-        echo "export GOROOT=/$(whoami)/.gvm/gos/go1.10/" >> /etc/profile
+    	apt-get install build-essential
+    	wget https://dl.google.com/go/go1.10.linux-amd64.tar.gz
+		tar zxvf go1.10.linux-amd64.tar.gz -C /usr/local
+        echo "export GOROOT=/usr/local/go" >> /etc/profile
         echo "export PATH=$PATH:$GOROOT/bin" >> /etc/profile
-        echo "export GOPATH=/$(whoami)/.gvm/gos/go1.10/pkg" >> /etc/profile
+        echo "export GOPATH=/$(whoami)/go1.10" >> /etc/profile
         source /etc/profile
         echo "========================================================================"
         echo "Golang安装完成！！"
